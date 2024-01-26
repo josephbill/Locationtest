@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+       <script type="text/javascript" src="../xui/xui-core-1.0.0.js"></script>
+       <link rel="stylesheet" href="../uiuikit/stylesheets/iphone.css" />
+       <style>
+           #mybtn {
+            margin-right: 12px;
+           }
+       </style>
+    </head>
+    <body>
+
+        <h1 id="h1div">Where am I? </h1>
+         <p id="btn">
+            <a href="#" onclick="get_location()" id="mybtn">Get location</a>
+         </p>
+    </body>
+    <script>
+      function onSuccess(pos){
+        let lat  = pos.coords.latitude;
+        let lon = pos.coords.longitude;
+        let ele = "<p>Location is: </p>";
+        ele += "<p>Lat " + lat + "</p>";
+        ele += "<p>lng " + lon + "</p>";
+        let h1 = document.getElementById('h1div').innerHTML = lat + " , " + lon
+        // $('#btn').html('after',ele)
+
+      }
+      function onError(msg){
+        alert("error " + msg)
+      }
+
+      function get_location() {
+        navigator.geolocation.watchPosition(onSuccess, onError, {enableHighAccuracy: true})
+      }
+    </script>
+</html>
